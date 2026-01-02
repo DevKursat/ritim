@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <title>Ritim</title>
+    <meta name="description" content="Müziğini görselleştir! Ses dalgalarını renklerle izle. 🎵🌈">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ritim - Müzik Görselleştirici">
+    <meta property="og:description" content="Müziğini görselleştir! Ses dalgalarını renklerle izle. 🎵🌈">
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="visualizer"></canvas>
+
+    <!-- Kontrol Paneli -->
+    <div class="controls" id="controls">
+        <button class="control-btn primary" id="startBtn">
+            <span class="icon">🎤</span>
+            <span class="text">Başlat</span>
+        </button>
+
+        <div class="themes" id="themes">
+            <button class="theme-btn active" data-theme="neon"
+                style="background: linear-gradient(135deg, #ff00ff, #00ffff)"></button>
+            <button class="theme-btn" data-theme="fire"
+                style="background: linear-gradient(135deg, #ff4500, #ffd700)"></button>
+            <button class="theme-btn" data-theme="ocean"
+                style="background: linear-gradient(135deg, #0077be, #00d4aa)"></button>
+            <button class="theme-btn" data-theme="galaxy"
+                style="background: linear-gradient(135deg, #4b0082, #9400d3)"></button>
+            <button class="theme-btn" data-theme="forest"
+                style="background: linear-gradient(135deg, #228b22, #32cd32)"></button>
+        </div>
+
+        <div class="modes" id="modes">
+            <button class="mode-btn active" data-mode="bars">📊 Çubuklar</button>
+            <button class="mode-btn" data-mode="wave">🌊 Dalga</button>
+            <button class="mode-btn" data-mode="circle">⭕ Daire</button>
+            <button class="mode-btn" data-mode="particles">✨ Parçacık</button>
+        </div>
+    </div>
+
+    <!-- İzin Ekranı -->
+    <div class="permission-screen" id="permissionScreen">
+        <div class="permission-content">
+            <div class="permission-icon">🎵</div>
+            <h1>Ritim</h1>
+            <p>Müziğini görselleştirmek için<br>mikrofon erişimine izin ver</p>
+            <button class="permission-btn" id="permissionBtn">
+                🎤 Mikrofona İzin Ver
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

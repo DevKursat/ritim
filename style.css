@@ -1,0 +1,237 @@
+/* Ritim - Müzik Görselleştirici Stilleri */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #0a0a0f;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Canvas */
+#visualizer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Kontroller */
+.controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    background: linear-gradient(to top, rgba(10, 10, 15, 0.95) 0%, transparent 100%);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.controls.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Ana Buton */
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn.primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+}
+
+.control-btn.primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 30px rgba(102, 126, 234, 0.6);
+}
+
+.control-btn.primary:active {
+    transform: scale(0.95);
+}
+
+.control-btn.primary.active {
+    background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+}
+
+.control-btn .icon {
+    font-size: 20px;
+}
+
+/* Tema Butonları */
+.themes {
+    display: flex;
+    gap: 12px;
+}
+
+.theme-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.theme-btn:hover {
+    transform: scale(1.15);
+}
+
+.theme-btn.active {
+    border-color: white;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Mod Butonları */
+.modes {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.mode-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.mode-btn.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* İzin Ekranı */
+.permission-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+.permission-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.1);
+}
+
+.permission-content {
+    text-align: center;
+    padding: 40px;
+}
+
+.permission-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.permission-content h1 {
+    color: white;
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f5576c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.permission-content p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.permission-btn {
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 30px rgba(102, 126, 234, 0.5);
+}
+
+.permission-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 40px rgba(102, 126, 234, 0.7);
+}
+
+.permission-btn:active {
+    transform: scale(0.95);
+}
+
+/* Hata Durumu */
+.permission-screen.error .permission-icon {
+    animation: none;
+}
+
+.permission-screen.error .permission-btn {
+    background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+}
